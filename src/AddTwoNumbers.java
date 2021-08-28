@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class AddTwoNumbers {
-    public void Run() {
+    public void run() {
         ListNode node1 = new ListNode(2);
         ListNode node2 = new ListNode(4);
         ListNode node3 = new ListNode(3);
@@ -17,6 +17,7 @@ public class AddTwoNumbers {
         node5.next = node6;
 
         ListNode result = addTwoNumbers(node1, node4);
+        System.out.println(result.toString());
     }
 
 
