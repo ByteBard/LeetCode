@@ -1,13 +1,13 @@
 public class MinimumWindowSubstring {
 
     public void run() {
-        String s ="DOABECODEBANC";
-        String t ="ABC";
-        System.out.println(minWindow(s,t));
+        String s = "DOABECODEBANC";
+        String t = "ABC";
+        System.out.println(minWindow1(s, t));
     }
 
-    public String minWindow(String s, String t) {
-        if (s == null || s.length() == 0 || t == null || t.length() == 0){
+    public String minWindow1(String s, String t) {
+        if (s == null || s.length() == 0 || t == null || t.length() == 0) {
             return "";
         }
         int[] need = new int[128];
@@ -42,4 +42,68 @@ public class MinimumWindowSubstring {
         }
         return size == Integer.MAX_VALUE ? "" : s.substring(start, start + size);
     }
+
+    public String minWindow2(String s, String t) {
+        int sLen = s.length();
+        int tLen = t.length();
+        if (sLen == 0 || tLen == 0 || sLen < tLen) {
+            return "";
+        }
+
+        char[] charArrayS = s.toCharArray();
+        char[] charArrayT = t.toCharArray();
+
+        int[] winFreq = new int[128];
+        int[] tFreq = new int[128];
+        for (char c : charArrayT) {
+            tFreq[c]++;
+        }
+
+        int distance = 0;
+        int minLen = sLen + 1;
+        int begin = 0;
+        int left = 0;
+        int right = 0;
+
+        while (right < sLen) {
+            // this part is not necessary
+            if (tFreq[charArrayS[right]] == 0) {
+                right++;
+                continue;
+            }
+
+            if (winFreq[charArrayS[right]] < tFreq[charArrayS[right]]) {
+                distance++;
+            }
+
+            winFreq[charArrayS[right]]++;
+            right++;
+
+            while (distance == tLen) {
+                // core part to keep
+                if (right - left < minLen) {
+                    minLen = right - left;
+                    begin = left;
+                }
+
+                if (tFreq[charArrayS[left]] == 0) {
+                    left++;
+                    continue;
+                }
+
+                if (winFreq[charArrayS[left]] == tFreq[charArrayS[left]]) {
+                    distance--;
+                }
+                winFreq[charArrayS[left]]--;
+                left++;
+
+            }
+        }
+        if (minLen == sLen + 1) {
+            return "";
+        }
+
+        return s.substring(begin, begin + minLen);
+    }
+}
 }
