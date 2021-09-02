@@ -106,4 +106,4 @@ public class MinimumWindowSubstring {
         return s.substring(begin, begin + minLen);
     }
 }
-}
+
