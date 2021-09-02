@@ -75,12 +75,13 @@ public class MinimumWindowSubstring {
 
         while (right < sLen) {
             // this part is not necessary
-            if (tFreq[charArrayS[right]] == 0) {
-                right++;
-                continue;
-            }
+//            if (tFreq[charArrayS[right]] == 0) {
+//                right++;
+//                continue;
+//            }
 
             //todo: why change to != not work for s = "aaaaaaaaaaaabbbbbcdd"; t = "abcdd";
+            //maybe: using the testing strings, for the left part there is a -1 in frequency array, if we change < to != then the left can be 20, otherwise the left can only be 19 at most, and we can debug from left == 19;
             if (winFreq[charArrayS[right]] < tFreq[charArrayS[right]]) {
                 distance++;
             }
@@ -95,10 +96,10 @@ public class MinimumWindowSubstring {
                     begin = left;
                 }
 
-                if (tFreq[charArrayS[left]] == 0) {
-                    left++;
-                    continue;
-                }
+//                if (tFreq[charArrayS[left]] == 0) {
+//                    left++;
+//                    continue;
+//                }
 
                 //this time the left index should already behind the right index, so this position already covered by right index stepping
                 // then the compare should be simply via == or !=
