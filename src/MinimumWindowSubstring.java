@@ -1,9 +1,15 @@
 public class MinimumWindowSubstring {
 
     public void run() {
-        String s = "DOABECODEBANC";
-        String t = "ABC";
-        System.out.println(minWindow1(s, t));
+//        String s = "DOABECODEBANC";
+//        String t = "ABC";
+//        System.out.println(minWindow1(s, t));
+
+       String s = "aaaaaaaaaaaabbbbbcdd";
+        String t = "abcdd";
+
+        System.out.println(minWindow2(s, t));
+
     }
 
     public String minWindow1(String s, String t) {
@@ -43,6 +49,8 @@ public class MinimumWindowSubstring {
         return size == Integer.MAX_VALUE ? "" : s.substring(start, start + size);
     }
 
+    //we are actually maintaining: 1, distance 2, source frequency array; the target frequency array is fixed already
+    //each step we move the right index, we are adding new char to the source frequency array, this is mandatory, however, the distance adjustment is based on whether the frequency of char in source frequency array is less (as there maybe)
     public String minWindow2(String s, String t) {
         int sLen = s.length();
         int tLen = t.length();
@@ -72,6 +80,7 @@ public class MinimumWindowSubstring {
                 continue;
             }
 
+            //todo: why change to != not work for s = "aaaaaaaaaaaabbbbbcdd"; t = "abcdd";
             if (winFreq[charArrayS[right]] < tFreq[charArrayS[right]]) {
                 distance++;
             }
@@ -91,6 +100,9 @@ public class MinimumWindowSubstring {
                     continue;
                 }
 
+                //this time the left index should already behind the right index, so this position already covered by right index stepping
+                // then the compare should be simply via == or !=
+                // eg. in string "...AAAA..." when the left index arrive 1st 'A', this position is already covered by right index, so we can simply try to judge the target string coverage by
                 if (winFreq[charArrayS[left]] == tFreq[charArrayS[left]]) {
                     distance--;
                 }
