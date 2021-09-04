@@ -1,6 +1,6 @@
 public class RunSolution {
     public static void main(String[] args){
-        LengthOfLongestSubstringTwoDistinct x = new LengthOfLongestSubstringTwoDistinct();
+        MinimumSizeSubArraySum x = new MinimumSizeSubArraySum();
         x.run();
     }
 }
