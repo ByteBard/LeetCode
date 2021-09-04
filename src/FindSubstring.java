@@ -9,11 +9,6 @@ public class FindSubstring {
         String s = "wordgoodgoodgoodbestword";
         String[] words = new String[]{ "word","good","best","word"};
         System.out.println((findSubstring(s, words)).toString());
-
-
-
-
-
     }
 
     public List<Integer> findSubstring(String s, String[] words) {
