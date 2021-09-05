@@ -1,6 +1,6 @@
 public class RunSolution {
     public static void main(String[] args){
-        SlidingWindowMaximum x = new SlidingWindowMaximum();
+        PermutationInString x = new PermutationInString();
         x.run();
     }
 }
