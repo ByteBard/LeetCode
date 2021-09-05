@@ -4,9 +4,10 @@ import java.util.HashSet;
 public class PermutationInString {
 
     public void run() {
-        String s1 = "ab", s2 = "eidboaoo";
+        //String s1 = "ab", s2 = "eidboaoo";
+        String s1 = "abb", s2 = "aaacccbb";
 
-        boolean result = checkInclusion_offical(s1, s2);
+        boolean result = checkInclusion_mliu01(s1, s2);
         System.out.println(result);
 
     }
@@ -63,9 +64,11 @@ public class PermutationInString {
 
         int left = 0;
         int right = 0;
-        while (right < m){
+        while (right < m) {
             int x = s2.charAt(right) - 'a';
             ++cnt[x];
+            //means the char frequency is bigger than target char frequency, we have to remove the scrupulous ones until cnt[x] <= 0 if <0,
+            // then it means this char in target string is not fully covered but exist in target string, =0 means exactly fully covered or not exist in target string
             while (cnt[x] > 0) {
                 --cnt[s2.charAt(left) - 'a'];
                 ++left;
@@ -101,6 +104,63 @@ public class PermutationInString {
         }
         return false;
     }
+
+//    作者：LeetCode
+//    链接：https://leetcode-cn.com/problems/permutation-in-string/solution/zi-fu-chuan-de-pai-lie-by-leetcode-q6tp/
+//    来源：力扣（LeetCode）
+//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+    //imitate 76 (same idea)
+    public boolean checkInclusion_offical_01(String s1, String s2) {
+        char[] pattern = s1.toCharArray();
+        char[] text = s2.toCharArray();
+
+        int pLen = s1.length();
+        int tLen = s2.length();
+
+        int[] pFreq = new int[26];
+        int[] winFreq = new int[26];
+
+        for (int i = 0; i < pLen; i++) {
+            pFreq[pattern[i] - 'a']++;
+        }
+
+        int pCount = 0;
+        for (int i = 0; i < 26; i++) {
+            if (pFreq[i] > 0) {
+                pCount++;
+            }
+        }
+
+        int left = 0;
+        int right = 0;
+        // 当滑动窗口中的某个字符个数与 s1 中对应相等的时候才计数
+        int winCount = 0;
+        while (right < tLen) {
+            if (pFreq[text[right] - 'a'] > 0) {
+                winFreq[text[right] - 'a']++;
+                if (winFreq[text[right] - 'a'] == pFreq[text[right] - 'a']) {
+                    winCount++;
+                }
+            }
+            right++;
+
+            while (pCount == winCount) {
+                if (right - left == pLen) {
+                    return true;
+                }
+                if (pFreq[text[left] - 'a'] > 0) {
+                    winFreq[text[left] - 'a']--;
+                    if (winFreq[text[left] - 'a'] < pFreq[text[left] - 'a']) {
+                        winCount--;
+                    }
+                }
+                left++;
+            }
+        }
+        return false;
+    }
+
 
 // Author: Huahua
 // Running time: 12 ms
