@@ -1,6 +1,6 @@
 public class RunSolution {
     public static void main(String[] args){
-        SmallestRange x = new SmallestRange();
+        TrappingRainWater x = new TrappingRainWater();
         x.run();
     }
 }
