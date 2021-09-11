@@ -1,6 +1,6 @@
 public class RunSolution {
     public static void main(String[] args){
-        TrappingRainWater x = new TrappingRainWater();
+        MedianFinder x = new MedianFinder();
         x.run();
     }
 }
