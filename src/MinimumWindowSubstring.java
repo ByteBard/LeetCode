@@ -5,10 +5,11 @@ public class MinimumWindowSubstring {
 //        String t = "ABC";
 //        System.out.println(minWindow1(s, t));
 
-       String s = "aaaaaaaaaaaabbbbbcdd";
-        String t = "abcdd";
-
-        System.out.println(minWindow2(s, t));
+        String s = "ADOBECODEBANC";
+        String t = "ABC";
+        String s1 = "ab";
+        String t1 = "b";
+        System.out.println(minWinSubStr(s1, t1));
 
     }
 
@@ -118,6 +119,72 @@ public class MinimumWindowSubstring {
 
         return s.substring(begin, begin + minLen);
     }
+
+
+    public String minWinSubStr(String source, String target) {
+
+        if (source == null || source.length() == 0 || target == null || target.length() == 0) {
+            return "";
+        }
+
+        var sourceCharArr = source.toCharArray();
+        var sourceHashMap = new int[128];
+        var targetHashMap = new int[128];
+        var winHashMap = new int[128];
+
+        var winSize = 0;
+        var targetUniqueSize = 0;
+
+        var sourceSize = source.length();
+        var targetSize = target.length();
+
+        if (sourceSize < targetSize) return "";
+        for (int i = 0; i < sourceSize; i++) {
+            sourceHashMap[source.charAt(i)]++;
+        }
+        for (int i = 0; i < targetSize; i++) {
+            if (targetHashMap[target.charAt(i)] == 0) targetUniqueSize++;
+            targetHashMap[target.charAt(i)]++;
+        }
+        var left = 0;
+        var right = 0;
+        var result = "";
+        while (right < sourceSize) {
+            var currentCharRight = sourceCharArr[right];
+            winHashMap[currentCharRight]++;
+            var targetCount = targetHashMap[currentCharRight];
+            var currentCount = winHashMap[currentCharRight];
+            if (currentCount == targetCount && currentCount > 0 && targetCount > 0) {
+                winSize++;
+                if (winSize >= targetUniqueSize) {
+                    var candidateStr = source.substring(left, right + 1);
+                    if (candidateStr.length() < result.length() || result == "") {
+                        result = candidateStr;
+                    }
+                }
+            }
+
+            while (left <= right && winSize >= targetUniqueSize) {
+                var candidateStr = source.substring(left, right + 1);
+                if (candidateStr.length() < result.length() || result == "") {
+                    result = candidateStr;
+                }
+
+                var currentCharLeft = sourceCharArr[left];
+                var targetCountLeft = targetHashMap[currentCharLeft];
+                var currentCountLeft = winHashMap[currentCharLeft];
+                if (currentCountLeft == targetCountLeft && currentCountLeft > 0 && targetCountLeft > 0) {
+                    winSize--;
+                }
+                winHashMap[currentCharLeft]--;
+                left++;
+            }
+
+            right++;
+        }
+
+        return result;
+    }
 }
 //
 //    给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
@@ -157,3 +224,4 @@ public class MinimumWindowSubstring {
 //        来源：力扣（LeetCode）
 //        链接：https://leetcode-cn.com/problems/minimum-window-substring
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
