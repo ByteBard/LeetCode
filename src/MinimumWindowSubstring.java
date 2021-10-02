@@ -158,6 +158,72 @@ public class MinimumWindowSubstring {
         if(minLength == targetSize + 1) return "";
         return source.substring(begin, begin + minLength);
     }
+
+    //raw version using hashmap
+    public String minWindow(String source, String target) {
+
+        if (source == null || source.length() == 0 || target == null || target.length() == 0) {
+            return "";
+        }
+
+        var sourceCharArr = source.toCharArray();
+        var sourceHashMap = new int[128];
+        var targetHashMap = new int[128];
+        var winHashMap = new int[128];
+
+        var winSize = 0;
+        var targetUniqueSize = 0;
+
+        var sourceSize = source.length();
+        var targetSize = target.length();
+
+        if (sourceSize < targetSize) return "";
+        for (int i = 0; i < sourceSize; i++) {
+            sourceHashMap[source.charAt(i)]++;
+        }
+        for (int i = 0; i < targetSize; i++) {
+            if (targetHashMap[target.charAt(i)] == 0) targetUniqueSize++;
+            targetHashMap[target.charAt(i)]++;
+        }
+        var left = 0;
+        var right = 0;
+        var result = "";
+        while (right < sourceSize) {
+            var currentCharRight = sourceCharArr[right];
+            winHashMap[currentCharRight]++;
+            var targetCount = targetHashMap[currentCharRight];
+            var currentCount = winHashMap[currentCharRight];
+            if (currentCount == targetCount && currentCount > 0 && targetCount > 0) {
+                winSize++;
+                if (winSize >= targetUniqueSize) {
+                    var candidateStr = source.substring(left, right + 1);
+                    if (candidateStr.length() < result.length() || result == "") {
+                        result = candidateStr;
+                    }
+                }
+            }
+
+            while (left <= right && winSize >= targetUniqueSize) {
+                var candidateStr = source.substring(left, right + 1);
+                if (candidateStr.length() < result.length() || result == "") {
+                    result = candidateStr;
+                }
+
+                var currentCharLeft = sourceCharArr[left];
+                var targetCountLeft = targetHashMap[currentCharLeft];
+                var currentCountLeft = winHashMap[currentCharLeft];
+                if (currentCountLeft == targetCountLeft && currentCountLeft > 0 && targetCountLeft > 0) {
+                    winSize--;
+                }
+                winHashMap[currentCharLeft]--;
+                left++;
+            }
+
+            right++;
+        }
+
+        return result;
+    }
 }
 //
 //    给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
