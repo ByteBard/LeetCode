@@ -7,9 +7,9 @@ public class MinimumWindowSubstring {
 
         String s = "ADOBECODEBANC";
         String t = "ABC";
-        String s1 = "ab";
-        String t1 = "b";
-        System.out.println(minWinSubStr(s1, t1));
+        String s1 = "abc";
+        String t1 = "ggg";
+        System.out.println(minWinSubStr(s, t));
 
     }
 
@@ -75,15 +75,8 @@ public class MinimumWindowSubstring {
         int right = 0;
 
         while (right < sLen) {
-            // this part is not necessary
-//            if (tFreq[charArrayS[right]] == 0) {
-//                right++;
-//                continue;
-//            }
-
-            //todo: why change to != not work for s = "aaaaaaaaaaaabbbbbcdd"; t = "abcdd";
-            //maybe: using the testing strings, for the left part there is a -1 in frequency array, if we change < to != then the left can be 20, otherwise the left can only be 19 at most, and we can debug from left == 19;
-            if (winFreq[charArrayS[right]] < tFreq[charArrayS[right]]) {
+            var currentCharRight = charArrayS[right];
+            if (winFreq[currentCharRight] < tFreq[currentCharRight]) {
                 distance++;
             }
 
@@ -97,15 +90,8 @@ public class MinimumWindowSubstring {
                     begin = left;
                 }
 
-//                if (tFreq[charArrayS[left]] == 0) {
-//                    left++;
-//                    continue;
-//                }
-
-                //this time the left index should already behind the right index, so this position already covered by right index stepping
-                // then the compare should be simply via == or !=
-                // eg. in string "...AAAA..." when the left index arrive 1st 'A', this position is already covered by right index, so we can simply try to judge the target string coverage by
-                if (winFreq[charArrayS[left]] == tFreq[charArrayS[left]]) {
+                var currentCharLeft = charArrayS[left];
+                if (winFreq[currentCharLeft] == tFreq[currentCharLeft]) {
                     distance--;
                 }
                 winFreq[charArrayS[left]]--;
@@ -122,68 +108,55 @@ public class MinimumWindowSubstring {
 
 
     public String minWinSubStr(String source, String target) {
-
-        if (source == null || source.length() == 0 || target == null || target.length() == 0) {
-            return "";
-        }
-
-        var sourceCharArr = source.toCharArray();
-        var sourceHashMap = new int[128];
-        var targetHashMap = new int[128];
-        var winHashMap = new int[128];
-
-        var winSize = 0;
-        var targetUniqueSize = 0;
-
         var sourceSize = source.length();
         var targetSize = target.length();
-
-        if (sourceSize < targetSize) return "";
-        for (int i = 0; i < sourceSize; i++) {
-            sourceHashMap[source.charAt(i)]++;
+        if (source == null || sourceSize == 0 || target == null || targetSize == 0 || sourceSize < targetSize) {
+            return "";
         }
+        var sourceCharArr = source.toCharArray();
+        var targetHashMap = new int[128];
+        var winHashMap = new int[128];
         for (int i = 0; i < targetSize; i++) {
-            if (targetHashMap[target.charAt(i)] == 0) targetUniqueSize++;
             targetHashMap[target.charAt(i)]++;
         }
         var left = 0;
         var right = 0;
-        var result = "";
+        var begin = 0;
+        var minLength = 0;
+        var distance = 0;
         while (right < sourceSize) {
             var currentCharRight = sourceCharArr[right];
-            winHashMap[currentCharRight]++;
             var targetCount = targetHashMap[currentCharRight];
-            var currentCount = winHashMap[currentCharRight];
-            if (currentCount == targetCount && currentCount > 0 && targetCount > 0) {
-                winSize++;
-                if (winSize >= targetUniqueSize) {
-                    var candidateStr = source.substring(left, right + 1);
-                    if (candidateStr.length() < result.length() || result == "") {
-                        result = candidateStr;
-                    }
-                }
+            var currentCountRight = winHashMap[currentCharRight];
+            if (currentCountRight < targetCount) {
+                distance++;
             }
+            winHashMap[currentCharRight]++;
+            //in the final round right++ is out of bound but still be used for minLength calculation in the left contraction loop
+            right++;
 
-            while (left <= right && winSize >= targetUniqueSize) {
-                var candidateStr = source.substring(left, right + 1);
-                if (candidateStr.length() < result.length() || result == "") {
-                    result = candidateStr;
-                }
+            while (distance == targetSize) {
+                //in the final round, right would be out of arr bound (+1) but it's necessary to get the distance,
+                if(right - left < minLength) minLength = right - left;
 
                 var currentCharLeft = sourceCharArr[left];
                 var targetCountLeft = targetHashMap[currentCharLeft];
                 var currentCountLeft = winHashMap[currentCharLeft];
-                if (currentCountLeft == targetCountLeft && currentCountLeft > 0 && targetCountLeft > 0) {
-                    winSize--;
+
+                //to get into the loop the slide window should fully contained the target chars (with the char count)
+                //so if currentCountLeft == targetCountLeft then it means we find the exact char of the target chars
+                // then distance--; and next round it will definitely quit the loop
+                if (currentCountLeft == targetCountLeft) {
+                    distance--;
                 }
+
                 winHashMap[currentCharLeft]--;
                 left++;
             }
-
-            right++;
         }
 
-        return result;
+        if(minLength == targetSize + 1) return "";
+        return source.substring(begin, begin + minLength);
     }
 }
 //
