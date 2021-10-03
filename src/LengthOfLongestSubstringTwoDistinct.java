@@ -1,9 +1,10 @@
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class LengthOfLongestSubstringTwoDistinct {
     public void run() {
-        String s = "aa";
-        System.out.println(lengthOfLongestSubstringTwoDistinct_100(s));
+        String s = "ccaabbb";
+        System.out.println(LengthOfLongestSubstringTwoDistinct_ml02(s));
     }
 
     public int lengthOfLongestSubstringTwoDistinct_mliu(String s) {
@@ -58,4 +59,90 @@ public class LengthOfLongestSubstringTwoDistinct {
         }
         return res;
     }
+
+
+    public int LengthOfLongestSubstringTwoDistinct_ml01(String s) {
+        var right = 0;
+        var left = 0;
+        var maxLength = 0;
+        var size = s.length();
+        HashMap<Character, Integer> hashMap = new HashMap();
+        while (right < size) {
+            var currentRightChar = s.charAt(right);
+            if (hashMap.containsKey(currentRightChar)) {
+                var currentValueRight = hashMap.get(currentRightChar);
+                hashMap.put(currentRightChar, currentValueRight + 1);
+            } else {
+                hashMap.put(currentRightChar, 1);
+            }
+
+            right++;
+
+            while (hashMap.size() > 2) {
+                var currentLeftChar = s.charAt(left);
+                var currentValueLeft = hashMap.get(currentLeftChar);
+                if (currentValueLeft > 1) {
+                    hashMap.put(currentLeftChar, currentValueLeft - 1);
+                } else {
+                    hashMap.remove(currentLeftChar);
+                }
+
+                left++;
+            }
+
+            maxLength = Math.max(maxLength, right - left);
+        }
+
+        return maxLength;
+
+    }
+
+    public int LengthOfLongestSubstringTwoDistinct_ml02(String s) {
+        var right = 0;
+        var left = 0;
+        var maxLength = 0;
+        var size = s.length();
+        var count = 0;
+        var charFreq = new int[256];
+        while (right < size) {
+            var currentRightChar = s.charAt(right);
+            if(charFreq[currentRightChar] == 0) {
+                count++;
+            }
+            charFreq[currentRightChar]++;
+            right++;
+
+            while (count > 2) {
+                var currentLeftChar = s.charAt(left);
+                charFreq[currentLeftChar]--;
+                if(charFreq[currentLeftChar] == 0) {
+                    count--;
+                };
+                left++;
+            }
+
+            maxLength = Math.max(maxLength, right - left);
+        }
+
+        return maxLength;
+    }
 }
+
+
+//
+//    给定一个字符串 s ，找出 至多 包含两个不同字符的最长子串 t ，并返回该子串的长度。
+//
+//        示例 1:
+//
+//        输入: "eceba"
+//        输出: 3
+//        解释: t 是 "ece"，长度为3。
+//        示例 2:
+//
+//        输入: "ccaabbb"
+//        输出: 5
+//        解释: t 是 "aabbb"，长度为5。
+//
+//        来源：力扣（LeetCode）
+//        链接：https://leetcode-cn.com/problems/longest-substring-with-at-most-two-distinct-characters
+//        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
