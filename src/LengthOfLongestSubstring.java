@@ -6,7 +6,7 @@ public class LengthOfLongestSubstring {
 
     public void run1() {
         String s = "pwwkew";
-        System.out.println(lengthOfLongestSubstring1(s));
+        System.out.println(lengthOfLongestSubstring2(s));
     }
 
     public void run2() {
@@ -43,15 +43,74 @@ public class LengthOfLongestSubstring {
         int max = 0;
         int left = 0;
         for (int i = 0; i < s.length(); i++) {
-            if (map.containsKey(s.charAt(i))) {
-                left = Math.max(left, map.get(s.charAt(i)) + 1);
+            var currentChar = s.charAt(i);
+            if (map.containsKey(currentChar)) {
+                left = Math.max(left, map.get(currentChar) + 1);
             }
-            map.put(s.charAt(i), i);
+            map.put(currentChar, i);
             max = Math.max(max, i - left + 1);
         }
         return max;
 
     }
 
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null) return 0;
+        var size = s.length();
+        if (size == 0) return 0;
+
+
+        var sourceCharArr = s.toCharArray();
+        var slideWin = new int[128];
+        var maxLength = 1;
+        var left = 0;
+        var right = 0;
+
+        while (right < size && left <= right) {
+            var currentRightChar = sourceCharArr[right];
+            slideWin[currentRightChar]++;
+
+            while (slideWin[currentRightChar] > 1) {
+                var currentLeftChar = sourceCharArr[left];
+                slideWin[currentLeftChar]--;
+                left++;
+            }
+
+            if (right - left + 1 > maxLength) maxLength = right - left + 1;
+            right++;
+        }
+
+        return maxLength;
+    }
+
+    //https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+//    给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+//
+//             
+//
+//    示例 1:
+//
+//    输入: s = "abcabcbb"
+//    输出: 3
+//    解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+//    示例 2:
+//
+//    输入: s = "bbbbb"
+//    输出: 1
+//    解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+//    示例 3:
+//
+//    输入: s = "pwwkew"
+//    输出: 3
+//    解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+//                 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+//    示例 4:
+//
+//    输入: s = ""
+//    输出: 0
+//
+//    来源：力扣（LeetCode）
+//    链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters
+//    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 }
