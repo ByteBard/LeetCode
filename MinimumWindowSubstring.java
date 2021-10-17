@@ -77,7 +77,7 @@ public class MinimumWindowSubstring {
         int right = 0;
 
         while (right < sLen) {
-            var currentCharRight = charArrayS[right];
+            int currentCharRight = charArrayS[right];
             if (winFreq[currentCharRight] < tFreq[currentCharRight]) {
                 distance++;
             }
@@ -92,7 +92,7 @@ public class MinimumWindowSubstring {
                     begin = left;
                 }
 
-                var currentCharLeft = charArrayS[left];
+                char currentCharLeft = charArrayS[left];
                 if (winFreq[currentCharLeft] == tFreq[currentCharLeft]) {
                     distance--;
                 }
@@ -110,26 +110,26 @@ public class MinimumWindowSubstring {
 
 
     public String minWinSubStr(String source, String target) {
-        var sourceSize = source.length();
-        var targetSize = target.length();
+        int sourceSize = source.length();
+        int targetSize = target.length();
         if (source == null || sourceSize == 0 || target == null || targetSize == 0 || sourceSize < targetSize) {
             return "";
         }
-        var sourceCharArr = source.toCharArray();
-        var targetHashMap = new int[128];
-        var winHashMap = new int[128];
+        char[] sourceCharArr = source.toCharArray();
+        int[] targetHashMap = new int[128];
+        int[] winHashMap = new int[128];
         for (int i = 0; i < targetSize; i++) {
             targetHashMap[target.charAt(i)]++;
         }
-        var left = 0;
-        var right = 0;
-        var begin = 0;
-        var minLength = 0;
-        var distance = 0;
+        int left = 0;
+        int right = 0;
+        int begin = 0;
+        int minLength = 0;
+        int distance = 0;
         while (right < sourceSize) {
-            var currentCharRight = sourceCharArr[right];
-            var targetCount = targetHashMap[currentCharRight];
-            var currentCountRight = winHashMap[currentCharRight];
+            int currentCharRight = sourceCharArr[right];
+            int targetCount = targetHashMap[currentCharRight];
+            int currentCountRight = winHashMap[currentCharRight];
             if (currentCountRight < targetCount) {
                 distance++;
             }
@@ -141,9 +141,9 @@ public class MinimumWindowSubstring {
                 //in the final round, right would be out of arr bound (+1) but it's necessary to get the distance,
                 if(right - left < minLength) minLength = right - left;
 
-                var currentCharLeft = sourceCharArr[left];
-                var targetCountLeft = targetHashMap[currentCharLeft];
-                var currentCountLeft = winHashMap[currentCharLeft];
+                int currentCharLeft = sourceCharArr[left];
+                int targetCountLeft = targetHashMap[currentCharLeft];
+                int currentCountLeft = winHashMap[currentCharLeft];
 
                 //to get into the loop the slide window should fully contained the target chars (with the char count)
                 //so if currentCountLeft == targetCountLeft then it means we find the exact char of the target chars
@@ -168,16 +168,16 @@ public class MinimumWindowSubstring {
             return "";
         }
 
-        var sourceCharArr = source.toCharArray();
-        var sourceHashMap = new int[128];
-        var targetHashMap = new int[128];
-        var winHashMap = new int[128];
+        char[] sourceCharArr = source.toCharArray();
+        int[] sourceHashMap = new int[128];
+        int[] targetHashMap = new int[128];
+        int[] winHashMap = new int[128];
 
-        var winSize = 0;
-        var targetUniqueSize = 0;
+        int winSize = 0;
+        int targetUniqueSize = 0;
 
-        var sourceSize = source.length();
-        var targetSize = target.length();
+        int sourceSize = source.length();
+        int targetSize = target.length();
 
         if (sourceSize < targetSize) return "";
         for (int i = 0; i < sourceSize; i++) {
@@ -187,18 +187,18 @@ public class MinimumWindowSubstring {
             if (targetHashMap[target.charAt(i)] == 0) targetUniqueSize++;
             targetHashMap[target.charAt(i)]++;
         }
-        var left = 0;
-        var right = 0;
-        var result = "";
+        int left = 0;
+        int right = 0;
+        String result = "";
         while (right < sourceSize) {
-            var currentCharRight = sourceCharArr[right];
+            int currentCharRight = sourceCharArr[right];
             winHashMap[currentCharRight]++;
-            var targetCount = targetHashMap[currentCharRight];
-            var currentCount = winHashMap[currentCharRight];
+            int targetCount = targetHashMap[currentCharRight];
+            int currentCount = winHashMap[currentCharRight];
             if (currentCount == targetCount && currentCount > 0 && targetCount > 0) {
                 winSize++;
                 if (winSize >= targetUniqueSize) {
-                    var candidateStr = source.substring(left, right + 1);
+                    String candidateStr = source.substring(left, right + 1);
                     if (candidateStr.length() < result.length() || result == "") {
                         result = candidateStr;
                     }
@@ -206,14 +206,14 @@ public class MinimumWindowSubstring {
             }
 
             while (left <= right && winSize >= targetUniqueSize) {
-                var candidateStr = source.substring(left, right + 1);
+                String candidateStr = source.substring(left, right + 1);
                 if (candidateStr.length() < result.length() || result == "") {
                     result = candidateStr;
                 }
 
-                var currentCharLeft = sourceCharArr[left];
-                var targetCountLeft = targetHashMap[currentCharLeft];
-                var currentCountLeft = winHashMap[currentCharLeft];
+                int currentCharLeft = sourceCharArr[left];
+                int targetCountLeft = targetHashMap[currentCharLeft];
+                int currentCountLeft = winHashMap[currentCharLeft];
                 if (currentCountLeft == targetCountLeft && currentCountLeft > 0 && targetCountLeft > 0) {
                     winSize--;
                 }

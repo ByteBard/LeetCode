@@ -45,7 +45,7 @@ public class LengthOfLongestSubstring {
         int max = 0;
         int left = 0;
         for (int i = 0; i < s.length(); i++) {
-            var currentChar = s.charAt(i);
+            char currentChar = s.charAt(i);
             if (map.containsKey(currentChar)) {
                 left = Math.max(left, map.get(currentChar) + 1);
             }
@@ -58,22 +58,22 @@ public class LengthOfLongestSubstring {
 
     public int lengthOfLongestSubstring(String s) {
         if (s == null) return 0;
-        var size = s.length();
+        int size = s.length();
         if (size == 0) return 0;
 
 
-        var sourceCharArr = s.toCharArray();
-        var slideWin = new int[128];
-        var maxLength = 1;
-        var left = 0;
-        var right = 0;
+        char[] sourceCharArr = s.toCharArray();
+        int[] slideWin = new int[128];
+        int maxLength = 1;
+        int left = 0;
+        int right = 0;
 
         while (right < size && left <= right) {
-            var currentRightChar = sourceCharArr[right];
+            int currentRightChar = sourceCharArr[right];
             slideWin[currentRightChar]++;
 
             while (slideWin[currentRightChar] > 1) {
-                var currentLeftChar = sourceCharArr[left];
+                int currentLeftChar = sourceCharArr[left];
                 slideWin[currentLeftChar]--;
                 left++;
             }

@@ -64,15 +64,15 @@ public class LengthOfLongestSubstringTwoDistinct {
 
 
     public int LengthOfLongestSubstringTwoDistinct_ml01(String s) {
-        var right = 0;
-        var left = 0;
-        var maxLength = 0;
-        var size = s.length();
+        int right = 0;
+        int left = 0;
+        int maxLength = 0;
+        int size = s.length();
         HashMap<Character, Integer> hashMap = new HashMap();
         while (right < size) {
-            var currentRightChar = s.charAt(right);
+            char currentRightChar = s.charAt(right);
             if (hashMap.containsKey(currentRightChar)) {
-                var currentValueRight = hashMap.get(currentRightChar);
+                int currentValueRight = hashMap.get(currentRightChar);
                 hashMap.put(currentRightChar, currentValueRight + 1);
             } else {
                 hashMap.put(currentRightChar, 1);
@@ -81,8 +81,8 @@ public class LengthOfLongestSubstringTwoDistinct {
             right++;
 
             while (hashMap.size() > 2) {
-                var currentLeftChar = s.charAt(left);
-                var currentValueLeft = hashMap.get(currentLeftChar);
+                char currentLeftChar = s.charAt(left);
+                int currentValueLeft = hashMap.get(currentLeftChar);
                 if (currentValueLeft > 1) {
                     hashMap.put(currentLeftChar, currentValueLeft - 1);
                 } else {
@@ -100,14 +100,14 @@ public class LengthOfLongestSubstringTwoDistinct {
     }
 
     public int LengthOfLongestSubstringTwoDistinct_ml02(String s) {
-        var right = 0;
-        var left = 0;
-        var maxLength = 0;
-        var size = s.length();
-        var count = 0;
-        var charFreq = new int[256];
+        int right = 0;
+        int left = 0;
+        int maxLength = 0;
+        int size = s.length();
+        int count = 0;
+        int[] charFreq = new int[256];
         while (right < size) {
-            var currentRightChar = s.charAt(right);
+            char currentRightChar = s.charAt(right);
             if(charFreq[currentRightChar] == 0) {
                 count++;
             }
@@ -115,7 +115,7 @@ public class LengthOfLongestSubstringTwoDistinct {
             right++;
 
             while (count > 2) {
-                var currentLeftChar = s.charAt(left);
+                char currentLeftChar = s.charAt(left);
                 charFreq[currentLeftChar]--;
                 if(charFreq[currentLeftChar] == 0) {
                     count--;
