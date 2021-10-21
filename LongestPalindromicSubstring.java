@@ -32,6 +32,12 @@ public class LongestPalindromicSubstring {
         return right - left - 1;
     }
 }
+//
+//    String substring(int beginIndex, int endIndex)
+//    Returns a new string that is a substring of this string.
+//    The substring begins at the specified beginIndex and extends to the character at
+//    index endIndex – 1. Thus the length of the substring is endIndex-beginIndex.
+//    In other words you can say that beginIndex is inclusive and endIndex is exclusive while getting the substring.
 
 // solution
 // https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zui-chang-hui-wen-zi-chuan-by-leetcode-solution/
