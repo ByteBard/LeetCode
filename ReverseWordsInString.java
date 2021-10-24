@@ -6,7 +6,7 @@ public class ReverseWordsInString {
 
     public void run() {
         String s = "the   sky is blue";
-        String result = reverseWords02(s);
+        String result = reverseWords03(s);
         System.out.println(result);
     }
 
