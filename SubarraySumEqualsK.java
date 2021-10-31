@@ -27,7 +27,7 @@ public class SubarraySumEqualsK {
     }
 // 我的理解，preSum - k实际上就是把问题转换成: 到底有几个锚定点i满足其preSum + k == current preSum，
 // 可以肯定的是，这几个锚定点都不相同，而且其与当前i的所有间隔点的总和为k:(preSum + k == current preSum)
-    // 关于mp.put(0, 1); 我的理解: 
+    // 关于mp.put(0, 1); 我的理解:
 
 //    关于mp.put(0, 1); 这一行的作用就是为了应对 nums[0] +nums[1] + ... + nums[i] == k 的情况的,
 //    也就是从下标 0 累加到下标 i, 举个例子说明, 如数组 [1, 2, 3, 6], 那么这个数组的累加和数组为 [1, 3, 6, 12] 如果 k = 6,
