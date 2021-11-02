@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        RobotBoundedInCircle x  = new RobotBoundedInCircle();
+        ExpressiveWords x  = new ExpressiveWords();
         x.run();
     }
 }
