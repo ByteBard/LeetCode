@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        ExpressiveWords x  = new ExpressiveWords();
+        SpiralMatrix x  = new SpiralMatrix();
         x.run();
     }
 }
