@@ -2,6 +2,16 @@ package LeetCode;
 
 public class NextPermutation {
 
+    public void run(){
+        int[] n = new int[]{1,2,3,2,3,4};
+        int[] n1 = new int[]{1,5,8,4,7,6,5,3,1};
+        nextPermutation(n);
+        for (int x:n
+             ) {
+            System.out.println(x);
+        }
+    }
+
     public void nextPermutation(int[] nums) {
         int i = nums.length - 2;
         while (i >= 0 && nums[i] >= nums[i + 1]) {
