@@ -10,19 +10,18 @@ public class LongestChunkedPalindromeDecomposition {
         System.out.println(result);
     }
 
-    public int longestDecomposition_01(String text) {
+    public int longestDecomposition(String text) {
         int res = 0;
-        int pre = 0;
+        int prev = 0;
         int S = text.length();
-        for (int i = 0; i < S / 2; i++) {
-            if (text.substring(pre, i + 1).equals(text.substring(S - 1 - i, S - pre))) {
+        for (int i = 0; i < S / 2; ++i) {
+            if ((text.substring(prev, i - prev + 1)) == text.substring(S - 1 - i, i - prev + 1)) {
                 res += 2;
-                pre = i + 1;
+                prev = i + 1;
             }
         }
-
-
-
+        if (S % 2 == 1 || prev < S / 2)
+            ++res;
         return res;
     }
 
