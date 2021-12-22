@@ -11,6 +11,7 @@ public class TrappingRainWater {
     }
 
     //请注意max_left和max_right都是要掐头去尾，因为头尾是不需要計算max_left、max_right，没有意义，他们是单边状态，不能形成trap，不能蓄水，一定要形成双边状态才能蓄水，所以不可能是头尾两端
+    //88%, 94%
     public int trap_01(int[] height) {
         int sum = 0;
         int[] max_left = new int[height.length];
@@ -51,6 +52,7 @@ public class TrappingRainWater {
     // 继续推测，如何height[right + 1]往左边有比它大的：没关系，height[left - 1]依然小于这个值，所以height[left]容积是不会变的
     // 如何height[right + 1]往左边有比它大小的：没关系，height[left - 1]就算大于这个值，所以height[left]容积还是不会变，因为height[right + 1]正在围着它
     // 示例：3,2,0,0,0,8,9，可以看到9 > 3这时候2的容积就是以3为顶，因为3是最短板，无论是9往左的数是1还是8，2的容积始终以3为顶
+    //88%, 56%
     public int trap_02(int[] height) {
         int sum = 0;
         int max_left = 0;
@@ -85,6 +87,7 @@ public class TrappingRainWater {
 //    来源：力扣（LeetCode）
 //    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
     // this is much slower than two-pointer way
+    //19%, 67%
     public int trap_03(int[] height) {
         int sum = 0;
         Stack<Integer> stack = new Stack<>();
