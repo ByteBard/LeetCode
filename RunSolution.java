@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        CriticalConnections  x  = new CriticalConnections();
+        TrappingRainWater  x  = new TrappingRainWater();
         x.run();
     }
 }
