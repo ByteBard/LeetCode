@@ -60,6 +60,7 @@ public class ReverseWordsInString {
         System.out.println(result);
     }
 
+    //11%, 26%
     public String reverseWords01(String s) {
         // 除去开头和末尾的空白字符
         s = s.trim();
@@ -69,6 +70,7 @@ public class ReverseWordsInString {
         return String.join(" ", wordList);
     }
 
+    //78%, 59%
     public String reverseWords02(String s) {
         StringBuilder sb = trimSpaces(s);
 
@@ -134,6 +136,7 @@ public class ReverseWordsInString {
         }
     }
 
+    //23%, 30%
     public String reverseWords03(String s) {
         int left = 0, right = s.length() - 1;
         // 去掉字符串开头的空白字符
