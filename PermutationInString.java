@@ -111,7 +111,7 @@ s1 和 s2 仅包含小写字母
     }
 
     //76.32%, 38.21%
-    public boolean checkInclusion_offical(String s1, String s2) {
+    public boolean checkInclusion_official(String s1, String s2) {
         int n = s1.length(), m = s2.length();
         if (n > m) {
             return false;
@@ -142,7 +142,7 @@ s1 和 s2 仅包含小写字母
 
     //imitate 76 (same idea)
     //57.29%, 18.9%
-    public boolean checkInclusion_offical_01(String s1, String s2) {
+    public boolean checkInclusion_official_01(String s1, String s2) {
         char[] pattern = s1.toCharArray();
         char[] text = s2.toCharArray();
 
