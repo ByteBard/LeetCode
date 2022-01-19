@@ -112,6 +112,7 @@ public class ReverseWordsInString {
     }
 
     public void reverse(StringBuilder sb, int left, int right) {
+        // should not be equal
         while (left < right) {
             char tmp = sb.charAt(left);
             sb.setCharAt(left++, sb.charAt(right));
