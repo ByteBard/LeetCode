@@ -126,6 +126,7 @@ public class ReverseWordsInString {
          while (start < n) {
             // 循环至单词的末尾
             while (end < n && sb.charAt(end) != ' ') {
+                //注意这里的end其实不是cursor，是不为空格的char的长度，所以要转换为cursor还需要-1（end-1）
                 ++end;
             }
             // 翻转单词
@@ -163,6 +164,7 @@ public class ReverseWordsInString {
             }
             ++left;
         }
+        //do not forget the last word!
         d.offerFirst(word.toString());
 
         return String.join(" ", d);
