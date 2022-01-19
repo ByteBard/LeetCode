@@ -121,7 +121,8 @@ s1 和 s2 仅包含小写字母
             --cnt[s1.charAt(i) - 'a'];
         }
         int left = 0;
-        for (int right = 0; right < m; ++right) {
+        int right = 0;
+        while (right < m){
             int x = s2.charAt(right) - 'a';
             ++cnt[x];
             while (cnt[x] > 0) {
@@ -131,6 +132,7 @@ s1 和 s2 仅包含小写字母
             if (right - left + 1 == n) {
                 return true;
             }
+            right++;
         }
         return false;
     }
