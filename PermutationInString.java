@@ -43,7 +43,6 @@ s1 和 s2 仅包含小写字母
     public boolean checkInclusion_mliu(String s1, String s2) {
         int left = 0;
         int right = 0;
-        int count = 0;
         char[] targetCharArr = s1.toCharArray();
         char[] sourceCharArr = s2.toCharArray();
         int targetArrSize = targetCharArr.length;
@@ -68,6 +67,7 @@ s1 和 s2 仅包含小写字母
         while (right < sourceArrSize) {
             char currentCharRight = s2.charAt(right);
             slideWinArrFreq[currentCharRight]++;
+            //right++ should be here! as distance is always index + 1, so right - left would never be 0
             right++;
             while (right - left > targetArrSize) {
                 char currentCharLeft = s2.charAt(left);
