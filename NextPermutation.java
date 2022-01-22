@@ -36,9 +36,9 @@ public class NextPermutation {
 
     public void run(){
         int[] n = new int[]{1,2,3,2,3,4};
-        int[] n1 = new int[]{1,5,8,4,7,6,5,3,1};
-        nextPermutation(n);
-        for (int x:n
+        int[] n1 = new int[]{3,2,1};
+        nextPermutation(n1);
+        for (int x:n1
              ) {
             System.out.println(x);
         }
@@ -49,6 +49,8 @@ public class NextPermutation {
         while (i >= 0 && nums[i] >= nums[i + 1]) {
             i--;
         }
+        //i coule be -1, which means the array is already descending order
+        //then we skip this step and directly revert the whole array to ascending order
         if (i >= 0) {
             int j = nums.length - 1;
             while (j >= 0 && nums[i] >= nums[j]) {

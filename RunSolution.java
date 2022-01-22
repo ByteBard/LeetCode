@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        TrappingRainWater  x  = new TrappingRainWater();
+        NextPermutation  x  = new NextPermutation();
         x.run();
     }
 }
