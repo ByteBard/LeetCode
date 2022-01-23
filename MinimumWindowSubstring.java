@@ -46,10 +46,11 @@ s 和 t 由英文字母组成
         String t = "ABC";
         String s1 = "abc";
         String t1 = "ggg";
-        System.out.println(minWinSubStr(s, t));
+        System.out.println(minWindow1(s, t));
 
     }
 
+    //98.02, 78.58%
     public String minWindow1(String s, String t) {
         if (s == null || s.length() == 0 || t == null || t.length() == 0) {
             return "";
@@ -87,6 +88,7 @@ s 和 t 由英文字母组成
         return size == Integer.MAX_VALUE ? "" : s.substring(start, start + size);
     }
 
+    //91%, 45%
     //we are actually maintaining: 1, distance 2, source frequency array; the target frequency array is fixed already
     //each step we move the right index, we are adding new char to the source frequency array, this is mandatory, however, the distance adjustment is based on whether the frequency of char in source frequency array is less (as there maybe)
     public String minWindow2(String s, String t) {
@@ -144,58 +146,7 @@ s 和 t 由英文字母组成
     }
 
 
-    public String minWinSubStr(String source, String target) {
-        int sourceSize = source.length();
-        int targetSize = target.length();
-        if (source == null || sourceSize == 0 || target == null || targetSize == 0 || sourceSize < targetSize) {
-            return "";
-        }
-        char[] sourceCharArr = source.toCharArray();
-        int[] targetHashMap = new int[128];
-        int[] winHashMap = new int[128];
-        for (int i = 0; i < targetSize; i++) {
-            targetHashMap[target.charAt(i)]++;
-        }
-        int left = 0;
-        int right = 0;
-        int begin = 0;
-        int minLength = 0;
-        int distance = 0;
-        while (right < sourceSize) {
-            int currentCharRight = sourceCharArr[right];
-            int targetCount = targetHashMap[currentCharRight];
-            int currentCountRight = winHashMap[currentCharRight];
-            if (currentCountRight < targetCount) {
-                distance++;
-            }
-            winHashMap[currentCharRight]++;
-            //in the final round right++ is out of bound but still be used for minLength calculation in the left contraction loop
-            right++;
-
-            while (distance == targetSize) {
-                //in the final round, right would be out of arr bound (+1) but it's necessary to get the distance,
-                if(right - left < minLength) minLength = right - left;
-
-                int currentCharLeft = sourceCharArr[left];
-                int targetCountLeft = targetHashMap[currentCharLeft];
-                int currentCountLeft = winHashMap[currentCharLeft];
-
-                //to get into the loop the slide window should fully contained the target chars (with the char count)
-                //so if currentCountLeft == targetCountLeft then it means we find the exact char of the target chars
-                // then distance--; and next round it will definitely quit the loop
-                if (currentCountLeft == targetCountLeft) {
-                    distance--;
-                }
-
-                winHashMap[currentCharLeft]--;
-                left++;
-            }
-        }
-
-        if(minLength == targetSize + 1) return "";
-        return source.substring(begin, begin + minLength);
-    }
-
+    //5.71%, 5.21%
     //raw version using hashmap
     public String minWindow(String source, String target) {
 
