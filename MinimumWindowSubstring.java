@@ -120,12 +120,11 @@ s 和 t 由英文字母组成
             }
 
             winFreq[charArrayS[right]]++;
-            right++;
 
             while (distance == tLen) {
                 // core part to keep
-                if (right - left < minLen) {
-                    minLen = right - left;
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
                     begin = left;
                 }
 
@@ -137,6 +136,8 @@ s 和 t 由英文字母组成
                 left++;
 
             }
+
+            right++;
         }
         if (minLen == sLen + 1) {
             return "";
