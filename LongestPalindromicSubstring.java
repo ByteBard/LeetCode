@@ -62,7 +62,7 @@ s 仅由数字和英文字母（大写和/或小写）组成
         }
         //this part should always -1 as the updated right and left does not meet the criteria, so the real value should be right - left -2
         //also, the length should be always +1 for right - left index, so the final value is right - left - 2 + 1 = right - left - 1;
-        return right - left - 1;
+        return right - left - 1 ;
     }
 }
 //
