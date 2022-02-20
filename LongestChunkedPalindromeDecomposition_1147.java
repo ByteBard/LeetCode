@@ -1,6 +1,6 @@
 package LeetCode;
 
-public class LongestChunkedPalindromeDecomposition {
+public class LongestChunkedPalindromeDecomposition_1147 {
 
     public void run() {
         String text = "ghiabcdefhelloadamhelloabcdefghi";
