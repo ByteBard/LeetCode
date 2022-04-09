@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        NextPermutation  x  = new NextPermutation();
+        WordLadder_127  x  = new WordLadder_127();
         x.run();
     }
 }
