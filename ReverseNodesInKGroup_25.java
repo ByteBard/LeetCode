@@ -1,4 +1,7 @@
 package LeetCode;
+
+import java.util.List;
+
 /*
 25. K 个一组翻转链表
 给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
@@ -40,7 +43,7 @@ k 是一个正整数，它的值小于或等于链表的长度。
  */
 public class ReverseNodesInKGroup_25 {
 
-    public void run(){
+    public void run() {
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(3);
@@ -54,54 +57,50 @@ public class ReverseNodesInKGroup_25 {
         node3.next = node4;
         node4.next = node5;
 
-        ListNode result = reverseKGroup(node1, 2);
+        ListNode result = reverseKGroup01(node1, 2);
         System.out.println(result.toString());
 
     }
 
-    public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode hair = new ListNode(0);
-        hair.next = head;
-        ListNode pre = hair;
+    //https://www.youtube.com/watch?v=FYsYAELWyRs
+    //https://www.youtube.com/watch?v=pLx1VP-FnuY
+    public ListNode reverseKGroup01(ListNode head, int k) {
+        int count = 0;
+        ListNode dummy = new ListNode();
+        dummy.next = head;
 
-        while (head != null) {
-            ListNode tail = pre;
-            // 查看剩余部分长度是否大于等于 k
-            for (int i = 0; i < k; ++i) {
-                tail = tail.next;
-                if (tail == null) {
-                    return hair.next;
-                }
+        ListNode temp = dummy;
+
+        while (temp.next != null) {
+            temp = temp.next;
+            count++;
+        }
+
+        temp = dummy;
+
+        while (temp.next != null) {
+            if (count < k) break;
+            int nodes = k - 1;
+            ListNode tempNext = temp.next;
+            ListNode first = temp.next;
+            ListNode second = first.next;
+
+            while (nodes-- > 0) {
+                ListNode next = second.next;
+                second.next = first;
+                first = second;
+                //why not using second = second.next?
+                second = next;
             }
-            ListNode nex = tail.next;
-            ListNode[] reverse = myReverse(head, tail);
-            head = reverse[0];
-            tail = reverse[1];
-            // 把子链表重新接回原链表
-            pre.next = head;
-            tail.next = nex;
-            pre = tail;
-            head = tail.next;
+
+            count -= k;
+            temp.next = first;
+            //why can't use temp.next.next = second??
+            tempNext.next = second;
+            temp = tempNext;
+
         }
+        return dummy.next;
 
-        return hair.next;
     }
-
-    public ListNode[] myReverse(ListNode head, ListNode tail) {
-        ListNode prev = tail.next;
-        ListNode p = head;
-        while (prev != tail) {
-            ListNode nex = p.next;
-            p.next = prev;
-            prev = p;
-            p = nex;
-        }
-        return new ListNode[]{tail, head};
-    }
-
-//
-//    作者：LeetCode-Solution
-//    链接：https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/k-ge-yi-zu-fan-zhuan-lian-biao-by-leetcode-solutio/
-//    来源：力扣（LeetCode）
-//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 }
