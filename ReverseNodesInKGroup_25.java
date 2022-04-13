@@ -89,18 +89,15 @@ public class ReverseNodesInKGroup_25 {
                 ListNode next = second.next;
                 second.next = first;
                 first = second;
-                //why not using second = second.next?
                 second = next;
             }
 
             count -= k;
             temp.next = first;
-            //why can't use temp.next.next = second??
             tempNext.next = second;
             temp = tempNext;
 
         }
         return dummy.next;
-
     }
 }
