@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /*
 809. 情感丰富的文字
 有时候人们会用重复写一些字母来表示额外的感受，比如 "hello" -> "heeellooo", "hi" -> "hiii"。我们将相邻字母都相同的一串字符定义为相同字母组，例如："h", "eee", "ll", "ooo"。
@@ -40,28 +41,26 @@ public class ExpressiveWords_809 {
         int result = expressiveWords(S, words);
         System.out.println(result);
     }
+//
+//"heeellooo"
+//        ["hello", "hi", "helo"]
+
 
     public int expressiveWords(String S, String[] words) {
-        RLE R = new RLE(S);
-        int ans = 0;
-
+        KeyCounts target = new KeyCounts(S);
+        int result = 0;
         for (String word : words) {
-            RLE R2 = new RLE(word);
-            if (!R.key.equals(R2.key)) continue;
-            if (isMatch(R, R2)) {
-                ans++;
-            } else {
-                continue;
-            }
+            KeyCounts source = new KeyCounts(word);
+            if (isMatch(target, source)) result++;
         }
-        return ans;
+
+        return result;
     }
 
-    public boolean isMatch(RLE R, RLE R2) {
-        for (int i = 0; i < R.counts.size(); ++i) {
-            int c1 = R.counts.get(i);
-            int c2 = R2.counts.get(i);
-            if (c1 < 3 && c1 != c2 || c1 < c2)
+    public boolean isMatch(KeyCounts source, KeyCounts target) {
+        if (!source.key.equals(target.key)) return false;
+        for (int i = 0; i < source.counts.size(); i++) {
+            if (source.counts.get(i) < 3 && source.counts.get(i) != target.counts.get(i) || source.counts.get(i) < target.counts.get(i))
                 return false;
         }
 
@@ -69,20 +68,20 @@ public class ExpressiveWords_809 {
     }
 }
 
-class RLE {
+class KeyCounts {
+
     String key;
     List<Integer> counts;
 
-    public RLE(String S) {
-        StringBuilder sb = new StringBuilder();
+    public KeyCounts(String str) {
         counts = new ArrayList();
-
-        char[] ca = S.toCharArray();
-        int N = ca.length;
+        StringBuilder sb = new StringBuilder();
+        char[] strArr = str.toCharArray();
+        int length = strArr.length;
         int prev = -1;
-        for (int i = 0; i < N; ++i) {
-            if (i == N - 1 || ca[i] != ca[i + 1]) {
-                sb.append(ca[i]);
+        for (int i = 0; i < length; i++) {
+            if (i == length - 1 || strArr[i] != strArr[i + 1]) {
+                sb.append(strArr[i]);
                 counts.add(i - prev);
                 prev = i;
             }
@@ -90,9 +89,4 @@ class RLE {
 
         key = sb.toString();
     }
-//
-//    作者：LeetCode
-//    链接：https://leetcode-cn.com/problems/expressive-words/solution/qing-gan-feng-fu-de-wen-zi-by-leetcode/
-//    来源：力扣（LeetCode）
-//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 }

@@ -86,10 +86,10 @@ public class ReverseNodesInKGroup_25 {
             ListNode second = first.next;
 
             while (nodes-- > 0) {
-                ListNode next = second.next;
+                ListNode secondNext = second.next;
                 second.next = first;
                 first = second;
-                second = next;
+                second = secondNext;
             }
 
             count -= k;
