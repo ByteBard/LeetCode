@@ -25,6 +25,109 @@ public class GenerateParentheses_22 {
 提示：
 
 1 <= n <= 8
+
+workflow (backTrack):
+
+adding (
+(
+adding (
+((
+adding (
+(((
+adding )
+((()
+adding )
+((())
+adding )
+((()))
+((()))
+return
+removing )
+((())
+removing )
+((()
+removing )
+(((
+removing (
+((
+adding )
+(()
+adding (
+(()(
+adding )
+(()()
+adding )
+(()())
+(()())
+return
+removing )
+(()()
+removing )
+(()(
+removing (
+(()
+adding )
+(())
+adding (
+(())(
+adding )
+(())()
+(())()
+return
+removing )
+(())(
+removing (
+(())
+removing )
+(()
+removing )
+((
+removing (
+(
+adding )
+()
+adding (
+()(
+adding (
+()((
+adding )
+()(()
+adding )
+()(())
+()(())
+return
+removing )
+()(()
+removing )
+()((
+removing (
+()(
+adding )
+()()
+adding (
+()()(
+adding )
+()()()
+()()()
+return
+removing )
+()()(
+removing (
+()()
+removing )
+()(
+removing (
+()
+removing )
+(
+removing (
+
+((()))
+(()()
+(())()
+()(())
+()()()
+
  */
     public void run() {
         int x = 3;
@@ -46,17 +149,28 @@ public class GenerateParentheses_22 {
     public void backtrack(List<String> ans, StringBuilder cur, int open, int close, int max) {
         if (cur.length() == max * 2) {
             ans.add(cur.toString());
+            System.out.println(cur);
+            System.out.println("return");
             return;
         }
         if (open < max) {
             cur.append('(');
+            System.out.println("adding (");
+            System.out.println(cur);
             backtrack(ans, cur, open + 1, close, max);
+            System.out.println("removing " + cur.charAt(cur.length() - 1));
             cur.deleteCharAt(cur.length() - 1);
+            System.out.println(cur);
+
         }
         if (close < open) {
             cur.append(')');
+            System.out.println("adding )");
+            System.out.println(cur);
             backtrack(ans, cur, open, close + 1, max);
+            System.out.println("removing " + cur.charAt(cur.length() - 1));
             cur.deleteCharAt(cur.length() - 1);
+            System.out.println(cur);
         }
     }
 

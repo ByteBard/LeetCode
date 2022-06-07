@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        ExpressiveWords_809  x  = new ExpressiveWords_809();
+        GenerateParentheses_22  x  = new GenerateParentheses_22();
         x.run();
     }
 }
