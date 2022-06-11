@@ -37,6 +37,10 @@ public class KthLargestElementInAnArray_215 {
     }
 
     public int partition(int left, int right, int pivot_index) {
+        //首先我们利用变量储存轴值元素，并且为了方便比较除了轴值之外的所有元素，我们把轴值放到数组的最右边。并且
+        //初始化第一个比轴值小的位置，也就算是最左边left。循环中我们进行遍历，一旦发现元素值小于轴值，我们就把元素放到左侧，
+        //此时轴值的位置右移。遍历完之后，由于store_index是轴值所应该在的位置，并且里面储存着大于轴值的元素，而right index目前储存着的
+        //是轴值本身，所以我们对他们再进行一次交换，返回轴值的位置。
         int pivot_number = this.num_arr[pivot_index];
         swap(pivot_index, right);
         int stored_index = left;
