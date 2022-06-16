@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LengthOfLongestSubstring {
+public class LongestSubstringWithoutRepeatingCharacters_3 {
 
     public void run1() {
         String s = "pwwkew";

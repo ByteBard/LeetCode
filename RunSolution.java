@@ -2,7 +2,7 @@ package LeetCode;
 
 public class RunSolution {
     public static void main(String[] args){
-        NextPermutation  x  = new NextPermutation();
+        GenerateParentheses_22  x  = new GenerateParentheses_22();
         x.run();
     }
 }

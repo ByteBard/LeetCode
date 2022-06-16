@@ -1,10 +1,33 @@
+/*
+215. 数组中的第K个最大元素
+给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
+
+请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+
+
+
+示例 1:
+
+输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5
+示例 2:
+
+输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
+输出: 4
+
+
+提示：
+
+1 <= k <= nums.length <= 104
+-104 <= nums[i] <= 104
+ */
 package LeetCode;
 
 import java.util.PriorityQueue;
 import java.util.Random;
 
 //83%, 25%
-public class KthLargestElement {
+public class KthLargestElementInAnArray_215 {
     int num_arr[];
 
     public void run() {
@@ -14,6 +37,10 @@ public class KthLargestElement {
     }
 
     public int partition(int left, int right, int pivot_index) {
+        //首先我们利用变量储存轴值元素，并且为了方便比较除了轴值之外的所有元素，我们把轴值放到数组的最右边。并且
+        //初始化第一个比轴值小的位置，也就算是最左边left。循环中我们进行遍历，一旦发现元素值小于轴值，我们就把元素放到左侧，
+        //此时轴值的位置右移。遍历完之后，由于store_index是轴值所应该在的位置，并且里面储存着大于轴值的元素，而right index目前储存着的
+        //是轴值本身，所以我们对他们再进行一次交换，返回轴值的位置。
         int pivot_number = this.num_arr[pivot_index];
         swapWithCheck(pivot_index, right);
         int stored_index = left;

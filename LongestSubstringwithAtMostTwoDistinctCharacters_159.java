@@ -3,7 +3,7 @@ package LeetCode;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class LengthOfLongestSubstringTwoDistinct {
+public class LongestSubstringwithAtMostTwoDistinctCharacters_159 {
     public void run() {
         String s = "ccaabbb";
         System.out.println(LengthOfLongestSubstringTwoDistinct_ml02(s));
