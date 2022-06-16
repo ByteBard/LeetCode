@@ -15,7 +15,7 @@ public class KthLargestElement {
 
     public int partition(int left, int right, int pivot_index) {
         int pivot_number = this.num_arr[pivot_index];
-        swap(pivot_index, right);
+        swapWithCheck(pivot_index, right);
         int stored_index = left;
         for (int i = left; i <= right; i++) {
             if (this.num_arr[i] < pivot_number) {
@@ -24,7 +24,7 @@ public class KthLargestElement {
 
             }
         }
-        swap(right, stored_index);
+        swapWithCheck(right, stored_index);
         return stored_index;
     }
 
@@ -48,6 +48,14 @@ public class KthLargestElement {
         int size = nums.length;
         return quick_select(0, size - 1, size - k);
 
+    }
+
+    public void swapWithCheck(int i, int j) {
+        if (i != j) {
+            int temp = this.num_arr[i];
+            this.num_arr[i] = this.num_arr[j];
+            this.num_arr[j] = temp;
+        }
     }
 
     public void swap(int i, int j) {
