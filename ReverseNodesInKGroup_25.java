@@ -38,7 +38,7 @@ k 是一个正整数，它的值小于或等于链表的长度。
 
 列表中节点的数量在范围 sz 内
 1 <= sz <= 5000
-0 <= Node.val <= 1000
+0 <= TreeNode.val <= 1000
 1 <= k <= sz
  */
 public class ReverseNodesInKGroup_25 {
