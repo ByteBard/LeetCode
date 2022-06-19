@@ -6,26 +6,11 @@ public class LongestChunkedPalindromeDecomposition_1147 {
         String text = "ghiabcdefhelloadamhelloabcdefghi";
         String text1 = "aaa";
         String text2 = "bqrcnnqrcb";
-        int result = longestDecomposition_02(text2);
+        int result = longestDecomposition(text2);
         System.out.println(result);
     }
 
     public int longestDecomposition(String text) {
-        int res = 0;
-        int prev = 0;
-        int S = text.length();
-        for (int i = 0; i < S / 2; ++i) {
-            if ((text.substring(prev, i - prev + 1)) == text.substring(S - 1 - i, i - prev + 1)) {
-                res += 2;
-                prev = i + 1;
-            }
-        }
-        if (S % 2 == 1 || prev < S / 2)
-            ++res;
-        return res;
-    }
-
-    public int longestDecomposition_02(String text) {
         int res = 0;
         int left = 1;
         int leftPre = 0;
