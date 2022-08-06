@@ -56,4 +56,28 @@ public class MeetingRoomsII_253 {
 //    链接：https://leetcode-cn.com/problems/meeting-rooms-ii/solution/hui-yi-shi-ii-by-leetcode/
 //    来源：力扣（LeetCode）
 //    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+//
+//    253. Meeting Rooms II
+//    Given an array of meeting time intervals intervals where intervals[i] = [starti, endi],
+//    return the minimum number of conference rooms required.
+//给你一个会议时间安排的数组 intervals ，每个会议时间都会包括开始和结束的时间 intervals[i] = [starti, endi] ，返回 所需会议室的最小数量 。
+//
+//    来源：力扣（LeetCode）
+//    链接：https://leetcode.cn/problems/meeting-rooms-ii
+//    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+//
+//    Example 1:
+//
+//    Input: intervals = [[0,30],[5,10],[15,20]]
+//    Output: 2
+//    Example 2:
+//
+//    Input: intervals = [[7,10],[2,4]]
+//    Output: 1
+//
+//
+//    Constraints:
+//
+//            1 <= intervals.length <= 104
+//            0 <= starti < endi <= 106
 }
