@@ -47,7 +47,8 @@ s 仅由数字和英文字母（大写和/或小写）组成
             int len1 = expandAroundCenter(s, i, i);
             int len2 = expandAroundCenter(s, i, i + 1);
             int len = Math.max(len1, len2);
-            if (len > end - start) {
+            //the length should be (end - start) + 1
+            if (len > end - start + 1) {
                 start = i - (len - 1) / 2;
                 end = i + len / 2;
             }
