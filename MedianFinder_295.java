@@ -3,8 +3,8 @@ package LeetCode;
 import java.util.PriorityQueue;
 
 class MedianFinder_295 {
-    PriorityQueue<Integer> l = new PriorityQueue<>((a, b) -> b - a);
-    PriorityQueue<Integer> r = new PriorityQueue<>((a, b) -> a - b);
+    PriorityQueue<Integer> left = new PriorityQueue<>((x, y) -> y - x);
+    PriorityQueue<Integer> right = new PriorityQueue<>((x, y) -> x - y);
 
     public void run() {
         addNum(5);
@@ -17,31 +17,44 @@ class MedianFinder_295 {
         System.out.println(result);
     }
 
+    //This is my revised version (with more understandable way)
     public void addNum(int num) {
-        int s1 = l.size(), s2 = r.size();
-        if (s1 == s2) {
-            if (r.isEmpty() || num <= r.peek()) {
-                l.add(num);
+        if (left.size() == 0) {
+            left.add(num);
+        } else if (left.size() == right.size()) {
+            if (num > left.peek()) {
+                right.add(num);
             } else {
-                l.add(r.poll());
-                r.add(num);
+                int val = left.poll();
+                right.add(val);
+                left.add(num);
             }
-        } else {
-            if (l.peek() <= num) {
-                r.add(num);
+        } else if (left.size() < right.size()) {
+            if (num < right.peek()) {
+                left.add(num);
             } else {
-                r.add(l.poll());
-                l.add(num);
+                int val = right.poll();
+                left.add(val);
+                right.add(num);
+            }
+        } else if (left.size() > right.size()) {
+            if (num > left.peek()) {
+                right.add(num);
+            } else {
+                int val = left.poll();
+                right.add(val);
+                left.add(num);
             }
         }
     }
 
     public double findMedian() {
-        int s1 = l.size(), s2 = r.size();
-        if (s1 == s2) {
-            return (l.peek() + r.peek()) / 2.0;
+        if (left.size() < right.size()) {
+            return right.peek();
+        } else if (left.size() > right.size()) {
+            return left.peek();
         } else {
-            return l.peek();
+            return (double) (left.peek() + right.peek()) / 2;
         }
     }
 }

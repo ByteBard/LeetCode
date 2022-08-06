@@ -6,7 +6,7 @@ import java.util.HashSet;
 public class LongestSubstringwithAtMostTwoDistinctCharacters_159 {
     public void run() {
         String s = "ccaabbb";
-        System.out.println(LengthOfLongestSubstringTwoDistinct_ml02(s));
+        System.out.println(lengthOfLongestSubstringTwoDistinct_mliu02(s));
     }
 
     public int lengthOfLongestSubstringTwoDistinct_mliu(String s) {
@@ -99,34 +99,35 @@ public class LongestSubstringwithAtMostTwoDistinctCharacters_159 {
 
     }
 
-    public int LengthOfLongestSubstringTwoDistinct_ml02(String s) {
-        int right = 0;
+    public int lengthOfLongestSubstringTwoDistinct_mliu02(String s) {
+        char[] arr = s.toCharArray();
+        char[] win = new char[128];
         int left = 0;
-        int maxLength = 0;
-        int size = s.length();
+        int right = 0;
+        int maxLen = 0;
         int count = 0;
-        int[] charFreq = new int[256];
-        while (right < size) {
-            char currentRightChar = s.charAt(right);
-            if(charFreq[currentRightChar] == 0) {
-                count++;
+        while (right < arr.length) {
+            char rightCur = arr[right];
+            if (win[rightCur] == 0) {
+                ++count;
             }
-            charFreq[currentRightChar]++;
-            right++;
-
+            win[rightCur]++;
             while (count > 2) {
-                char currentLeftChar = s.charAt(left);
-                charFreq[currentLeftChar]--;
-                if(charFreq[currentLeftChar] == 0) {
-                    count--;
-                };
-                left++;
+                char leftCur = arr[left];
+                win[leftCur]--;
+                if (win[leftCur] == 0) {
+                    --count;
+                }
+                ++left;
             }
 
-            maxLength = Math.max(maxLength, right - left);
-        }
+            if (count <= 2) {
+                maxLen = Math.max(maxLen, right - left + 1);
+            }
 
-        return maxLength;
+            ++right;
+        }
+        return maxLen;
     }
 }
 
