@@ -2,7 +2,7 @@ package LeetCode;
 
 import java.util.PriorityQueue;
 
-class MedianFinder {
+class MedianFinder_295 {
     PriorityQueue<Integer> l = new PriorityQueue<>((a, b) -> b - a);
     PriorityQueue<Integer> r = new PriorityQueue<>((a, b) -> a - b);
 
