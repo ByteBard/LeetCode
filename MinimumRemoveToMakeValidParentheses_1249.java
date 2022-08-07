@@ -44,7 +44,7 @@ import java.util.Stack;
 1 <= s.length <= 10^5
 s[i] 可能是 '('、')' 或英文小写字母
  */
-public class MinimumRemoveToMakeValidParentheses {
+public class MinimumRemoveToMakeValidParentheses_1249 {
 
     //17%, 5.6%
     public String minRemoveToMakeValid_official(String s) {
