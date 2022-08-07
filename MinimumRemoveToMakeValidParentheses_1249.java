@@ -101,8 +101,36 @@ public class MinimumRemoveToMakeValidParentheses_1249 {
             }
         }
         return sb.toString();
+    }
 
+    public static String minRemoveToMakeValid_mliu(String s) {
+        HashSet<Integer> resHash = new HashSet<Integer>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < s.length(); ++i) {
+            char curr = s.charAt(i);
+            if (curr == '(') {
+                stack.push(i);
+            }
 
+            if (curr == ')') {
+                if (stack.size() > 0 && s.charAt(stack.peek()) == '(') {
+                    stack.pop();
+                } else {
+                    stack.push(i);
+                }
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            resHash.add(stack.pop());
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); ++i) {
+            if (!resHash.contains(i)) {
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
     }
 
 
