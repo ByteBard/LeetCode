@@ -33,7 +33,7 @@ package LeetCode;
 
 如果你已经实现 O(n) 时间复杂度的解法, 请尝试设计一个 O(n log(n)) 时间复杂度的解法。
  */
-public class MinimumSizeSubArraySum {
+public class MinimumSizeSubArraySum_209 {
 
     public void run() {
         int target = 11;
