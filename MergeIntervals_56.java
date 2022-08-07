@@ -53,6 +53,31 @@ public class MergeIntervals_56 {
         return merged.toArray(new int[merged.size()][]);
 
     }
+
+//    public int[][] merge2(int[][] intervals) {
+//        List<int[]> res = new ArrayList<>();
+//        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+//        for (int i = 0; i < intervals.length; ++i) {
+//            int[] curr = intervals[i];
+//            if (i == 0) {
+//                res.add(intervals[i]);
+//            } else {
+//                int[] last = res.get(res.size() - 1);
+//                if (last[1] >= curr[0]) {
+//                    last[1] = Math.max(last[1], curr[1]);
+//                    res.set(res.size() - 1, last);
+//                } else {
+//                    res.add(curr);
+//                }
+//            }
+//        }
+//
+//        int[][] resArr = new int[res.size()][];
+//        for (int i = 0; i < res.size(); ++i) {
+//            resArr[i] = res.get(i);
+//        }
+//        return resArr;
+//    }
 //
 //    作者：LeetCode-Solution
 //    链接：https://leetcode-cn.com/problems/merge-intervals/solution/he-bing-qu-jian-by-leetcode-solution/
