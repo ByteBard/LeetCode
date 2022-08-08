@@ -1,6 +1,6 @@
 package LeetCode;
 
-public class MinimumWindowSubstring {
+public class MinimumWindowSubstring_76 {
 /*
 76. 最小覆盖子串
 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
@@ -213,7 +213,54 @@ s 和 t 由英文字母组成
 
         return result;
     }
+
+    //100%, 98% (my original version)
+    public String minWindow_mliu(String s, String t) {
+        int minLeft = 0;
+        int minLen = 0;
+        int[] targetWin = new int[128];
+        int currentCount = 0;
+        int targetSize = t.length();
+        for (int i = 0; i < targetSize; ++i) {
+            targetWin[t.charAt(i)]++;
+        }
+        int[] slideWin = new int[128];
+        int left = 0;
+        int right = 0;
+        char[] arr = s.toCharArray();
+
+        while (right < arr.length) {
+            char currRight = arr[right];
+            slideWin[currRight]++;
+            if (targetWin[currRight] > 0 && slideWin[currRight] <= targetWin[currRight]) {
+                currentCount++;
+            }
+            while (currentCount >= targetSize) {
+                if (minLen == 0) {
+                    minLeft = left;
+                    minLen = right - left + 1;
+                } else {
+                    int currDistance = right - left + 1;
+                    if (currDistance < minLen) {
+                        minLeft = left;
+                        minLen = right - left + 1;
+                    }
+                }
+
+                char currentLeft = arr[left];
+                slideWin[currentLeft]--;
+                if (slideWin[currentLeft] < targetWin[currentLeft]) {
+                    currentCount--;
+                }
+                ++left;
+            }
+            ++right;
+        }
+
+        return s.substring(minLeft, minLeft + minLen);
+    }
 }
+
 //
 //    给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
 //
