@@ -62,4 +62,28 @@ public class MinimumSizeSubArraySum_209 {
         }
         return ans == Integer.MAX_VALUE ? 0 : ans;
     }
+
+    public static int minSubArrayLen_mliu(int target, int[] nums) {
+        int minLen = 0;
+        int sum = 0;
+        int right = 0;
+        int left = 0;
+        while (right < nums.length) {
+            int currRight = nums[right];
+            sum += currRight;
+            while (sum >= target) {
+                if (minLen == 0) {
+                    minLen = right - left + 1;
+                } else {
+                    minLen = Math.min(minLen, right - left + 1);
+                }
+
+                int currLeft = nums[left];
+                sum -= currLeft;
+                ++left;
+            }
+            ++right;
+        }
+        return minLen;
+    }
 }
