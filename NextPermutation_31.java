@@ -32,7 +32,7 @@ package LeetCode;
 1 <= nums.length <= 100
 0 <= nums[i] <= 100
  */
-public class NextPermutation {
+public class NextPermutation_31 {
 
     public void run(){
         int[] n = new int[]{1,2,3,2,3,4};
