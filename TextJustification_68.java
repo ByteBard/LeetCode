@@ -74,17 +74,15 @@ public class TextJustification_68 {
         while (i < n) {
             int j = i + 1;
             int lineLength = words[i].length();
-            while (i < n && (lineLength + words[j].length() + (j - 1 - 1) < maxWidth)) {
+            while (j < n && (lineLength + words[j].length() + (j - i - 1) < maxWidth)) {
                 lineLength += words[j].length();
                 ++j;
             }
             int diff = maxWidth - lineLength;
             int numberOfWords = j - i;
-            if (numberOfWords == 1 || j > n) {
-                result.add(leftJustify(words, diff, i, j));
-            } else {
-                result.add(middleJustify(words, diff, i, j));
-            }
+            if (numberOfWords == 1 || j >= n) result.add(leftJustify(words, diff, i, j));
+            else result.add(middleJustify(words, diff, i, j));
+            i = j;
         }
 
         return result;
@@ -95,7 +93,7 @@ public class TextJustification_68 {
         int space = diff / spaceNeeded;
         int extraSpaces = diff % spaceNeeded;
         StringBuilder result = new StringBuilder(words[i]);
-        for (int k = i = 1; k < j; ++k) {
+        for (int k = i + 1; k < j; ++k) {
             int spacesToApply = space + (extraSpaces-- > 0 ? 1 : 0);
             result.append(" ".repeat(spacesToApply) + words[k]);
         }
@@ -103,12 +101,12 @@ public class TextJustification_68 {
     }
 
     private String leftJustify(String[] words, int diff, int i, int j) {
-        int spaceOnRight = diff - j - i - 1;
+        int spaceOnRight = diff - (j - i - 1);
         StringBuilder result = new StringBuilder(words[i]);
         for (int k = i + 1; k < j; ++k) {
             result.append(" " + words[k]);
         }
-        result.append("".repeat(spaceOnRight));
+        result.append(" ".repeat(spaceOnRight));
         return result.toString();
     }
 }
