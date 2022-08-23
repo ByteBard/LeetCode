@@ -42,7 +42,7 @@ public class WordLadder_127 {
         String[] wordArr = new String[]{"hot", "dot", "dog", "lot", "log", "cog"};
 
         List<String> wordList = Arrays.asList(wordArr);
-        int result = ladderLength01(beginWord, endWord, wordList);
+        int result = ladderLength_formal(beginWord, endWord, wordList);
         System.out.println(result);
     }
 
@@ -50,6 +50,49 @@ public class WordLadder_127 {
     List<List<Integer>> edge = new ArrayList<List<Integer>>();
     int nodeNum = 0;
 
+
+    public int ladderLength_formal(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord)) return 0;
+        List<String> wlist = new ArrayList<>();
+        for (String w : wordList) {
+            wlist.add(w);
+        }
+        HashMap<String, List<String>> adjList = new HashMap<>();
+        wlist.add(beginWord);
+        for (String s : wordList) {
+            for (int i = 0; i < s.length(); i++) {
+                String pattern = s.substring(0, i) + "*" + s.substring(i + 1);
+                List<String> temp = adjList.getOrDefault(pattern, new ArrayList<>());
+                temp.add(s);
+                adjList.put(pattern, temp);
+            }
+        }
+        HashSet<String> visited = new HashSet<>();
+        visited.add(beginWord);
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
+        int ans = 1;
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            for (int i = 0; i < len; i++) {
+                String word = queue.poll();
+                if (word.equals(endWord)) return ans;
+
+                for (int j = 0; j < word.length(); j++) {
+                    String pattern = word.substring(0, j) + "*" + word.substring(j + 1);
+                    List<String> temp = adjList.getOrDefault(pattern, new ArrayList<>());
+                    for (String s : temp) {
+                        if (!visited.contains(s)) {
+                            queue.add(s);
+                            visited.add(s);
+                        }
+                    }
+                }
+            }
+            ans++;
+        }
+        return 0;
+    }
 
     public int ladderLength01(String beginWord, String endWord, List<String> wordList) {
         for (String word : wordList) {
