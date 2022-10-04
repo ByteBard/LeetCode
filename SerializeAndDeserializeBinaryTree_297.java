@@ -17,42 +17,38 @@ public class SerializeAndDeserializeBinaryTree_297 {
         }
     }
 
-    public String rserialize(TreeNode root, String str) {
-        // Recursive serialization.
-        if (root == null) {
-            str += "null,";
-        } else {
-            str += str.valueOf(root.val) + ",";
-            str = rserialize(root.left, str);
-            str = rserialize(root.right, str);
-        }
-        return str;
-    }
-
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         return rserialize(root, "");
     }
 
-    public TreeNode rdeserialize(List<String> l) {
-        // Recursive deserialization.
-        if (l.get(0).equals("null")) {
-            l.remove(0);
+    public String rserialize(TreeNode root, String val) {
+        if (root == null) {
+            val += "null,";
+        } else {
+            val += root.val + ",";
+            val += rserialize(root.left, "");
+            val += rserialize(root.right, "");
+        }
+        return val;
+    }
+
+    public TreeNode rdeserialize(List<String> ls) {
+        if (ls.get(0).equals("null")) {
+            ls.remove(0);
             return null;
         }
-
-        TreeNode root = new TreeNode(Integer.valueOf(l.get(0)));
-        l.remove(0);
-        root.left = rdeserialize(l);
-        root.right = rdeserialize(l);
-
+        TreeNode root = new TreeNode(Integer.valueOf(ls.get(0)));
+        ls.remove(0);
+        root.left = rdeserialize(ls);
+        root.right = rdeserialize(ls);
         return root;
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        String[] data_array = data.split(",");
-        List<String> data_list = new LinkedList<String>(Arrays.asList(data_array));
-        return rdeserialize(data_list);
+        String[] arr = data.split(",");
+        List<String> ls = new LinkedList<>(Arrays.asList(arr));
+        return rdeserialize(ls);
     }
 }
