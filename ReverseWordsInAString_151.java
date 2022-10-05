@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.*;
+
 /*
 151. 翻转字符串里的单词
 给你一个字符串 s ，逐个翻转字符串中的所有 单词 。
@@ -75,12 +76,12 @@ public class ReverseWordsInAString_151 {
         StringBuilder sb = trimSpaces(s);
 
         // 翻转字符串
-        reverse(sb , 0, sb.length() - 1);
+        reverse(sb, 0, sb.length() - 1);
 
         // 翻转每个单词
         reverseEachWord(sb);
 
-         return sb.toString();
+        return sb.toString();
     }
 
     public StringBuilder trimSpaces(String s) {
@@ -124,7 +125,7 @@ public class ReverseWordsInAString_151 {
         int n = sb.length();
         int start = 0, end = 0;
 
-         while (start < n) {
+        while (start < n) {
             // 循环至单词的末尾
             while (end < n && sb.charAt(end) != ' ') {
                 //注意这里的end其实不是cursor，是不为空格的char的长度，所以要转换为cursor还需要-1（end-1）
