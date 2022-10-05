@@ -29,7 +29,7 @@ import java.util.Stack;
 //        链接：https://leetcode-cn.com/problems/trapping-rain-water
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-public class TrappingRainWater {
+public class TrappingRainWater_42 {
 
     public void run() {
         int[] height = new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
