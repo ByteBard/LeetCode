@@ -74,7 +74,7 @@ public class TextJustification_68 {
         while (i < n) {
             int j = i + 1;
             int lineLength = words[i].length();
-            while (j < n && (lineLength + words[j].length() + (j - i - 1) < maxWidth)) {
+            while (j < n && (lineLength + words[j].length() + (j - i) <= maxWidth)) {
                 lineLength += words[j].length();
                 ++j;
             }
