@@ -108,6 +108,32 @@ public class TrappingRainWater_42 {
         return sum;
     }
 
+    //similar with trap02
+    public int trap(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int maxL = 0;
+        int maxR = 0;
+        int sum = 0;
+        while (left < right) {
+            if (height[left] < height[right]) {
+                maxL = Math.max(maxL, height[left]);
+                if (maxL > height[left]) {
+                    sum += (maxL - height[left]);
+                }
+                left++;
+            } else {
+                maxR = Math.max(maxR, height[right]);
+                if(maxR > height[right]){
+                    sum += (maxR - height[right]);
+                }
+                right--;
+            }
+        }
+
+        return sum;
+    }
+
 
 //    作者：windliang
 //    链接：https://leetcode-cn.com/problems/trapping-rain-water/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-8/
