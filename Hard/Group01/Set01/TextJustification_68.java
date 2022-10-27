@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set01;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +52,35 @@ import java.util.List;
 //        "everything  else  we",
 //        "do                  "
 //        ]
+
+
+
+
+
+
+
+
+
+
+//
+//class Solution {
+//    public List<String> fullJustify(String[] words, int maxWidth) {
+//
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class TextJustification_68 {
 
     public void run() {

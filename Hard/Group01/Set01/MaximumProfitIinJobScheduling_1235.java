@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set01;
 
 import java.util.Arrays;
 import java.util.TreeMap;
@@ -48,6 +48,18 @@ public class MaximumProfitIinJobScheduling_1235 {
 //            1 <= startTime.length == endTime.length == profit.length <= 5 * 10^4
 //            1 <= startTime[i] < endTime[i] <= 10^9
 //            1 <= profit[i] <= 10^4
+
+    /*
+
+
+class Solution {
+    public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
+
+    }
+}
+}
+     */
+
 
     public void run() {
 //        startTime = [1,2,3,4,6], endTime = [3,5,10,6,9], profit = [20,20,100,70,60]

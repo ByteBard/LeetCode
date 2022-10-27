@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set01;
 
 public class MedianOfTwoSortedArrays_4 {
 
@@ -32,6 +32,19 @@ public class MedianOfTwoSortedArrays_4 {
 //            0 <= n <= 1000
 //            1 <= m + n <= 2000
 //            -106 <= nums1[i], nums2[i] <= 106
+
+
+
+
+/*
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+    }
+}
+
+ */
     public void run() {
         int[] nums1 = new int[]{1, 3}, nums2 = new int[]{2};
 //        int[] nums1 = new int[]{1, 2}, nums2 = new int[]{3, 4};

@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set01;
 
 import java.util.*;
 
@@ -51,6 +51,24 @@ s 中 至少存在一个 单词
 进阶：
 
 请尝试使用 O(1) 额外空间复杂度的原地解法。
+
+
+
+
+
+
+
+
+
+class Solution {
+    public String reverseWords(String s) {
+
+    }
+}
+
+
+
+
 
  */
 public class ReverseWordsInAString_151 {
