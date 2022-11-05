@@ -105,9 +105,12 @@ public class TextJustification_68 {
             int lineLength = words[i].length();
             while (j < n && (lineLength + words[j].length() + (j - i) <= maxWidth)) {
                 lineLength += words[j].length();
+                // when j++ for the last loop, the j is over the bound, so not applicable for "j < n && (lineLength + words[j].length() + (j - i) <= maxWidth)", and j is always over the bound by 1;
+                // then j - i should be the covered word count, e.g. i = 0, j = 2 (over the bound by 1), then 2 words covered, the valid index are [0, 1];
                 ++j;
             }
             int diff = maxWidth - lineLength;
+            // this is the words we have covered, the space needed for the words, i.e. the space between the words are 1 less than the words count
             int numberOfWords = j - i;
             if (numberOfWords == 1 || j >= n) result.add(leftJustify(words, diff, i, j));
             else result.add(middleJustify(words, diff, i, j));
@@ -118,12 +121,13 @@ public class TextJustification_68 {
     }
 
     private String middleJustify(String[] words, int diff, int i, int j) {
-        //j is not applicable for "while (j < n && (lineLength + words[j].length() + (j - i) <= maxWidth))" anymore
+        // j is not applicable for "while (j < n && (lineLength + words[j].length() + (j - i) <= maxWidth))" anymore
+        // please note j - i - 1 is not for word count, it's for space needed between words, so it should be 1 less the words count
         int spaceNeeded = j - i - 1;
         int space = diff / spaceNeeded;
         int extraSpaces = diff % spaceNeeded;
         StringBuilder result = new StringBuilder(words[i]);
-        // k should start from i + 1, because this is the gap count between words, should be 1 less then the words count
+        // k should start from i + 1, because this is the gap count between words, should be 1 less than the words count
         for (int k = i + 1; k < j; ++k) {
             int spacesToApply = space + (extraSpaces-- > 0 ? 1 : 0);
             result.append(" ".repeat(spacesToApply) + words[k]);
@@ -132,6 +136,7 @@ public class TextJustification_68 {
     }
 
     private String leftJustify(String[] words, int diff, int i, int j) {
+        // please note j - i - 1 is not for word count, it's for space needed between words, so it should be 1 less the words count
         int spaceOnRight = diff - (j - i - 1);
         StringBuilder result = new StringBuilder(words[i]);
         for (int k = i + 1; k < j; ++k) {
