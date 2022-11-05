@@ -118,10 +118,12 @@ public class TextJustification_68 {
     }
 
     private String middleJustify(String[] words, int diff, int i, int j) {
+        //j is not applicable for "while (j < n && (lineLength + words[j].length() + (j - i) <= maxWidth))" anymore
         int spaceNeeded = j - i - 1;
         int space = diff / spaceNeeded;
         int extraSpaces = diff % spaceNeeded;
         StringBuilder result = new StringBuilder(words[i]);
+        // k should start from i + 1, because this is the gap count between words, should be 1 less then the words count
         for (int k = i + 1; k < j; ++k) {
             int spacesToApply = space + (extraSpaces-- > 0 ? 1 : 0);
             result.append(" ".repeat(spacesToApply) + words[k]);
