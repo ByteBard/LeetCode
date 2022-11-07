@@ -94,7 +94,11 @@ class Solution {
 
         int shortLeftMax = shortIdx == 0 ? Integer.MIN_VALUE : nums1[shortIdx - 1];
         int shortRightMin = shortIdx == shortLen ? Integer.MAX_VALUE : nums1[shortIdx];
+        // for edge case: nums1 = [1,3] nums2 = [2]
+        // int longLeftMax = nums2[longIdx - 1] will cause "Index -1 out of bounds for length 2"
         int longLeftMax = longIdx == 0 ? Integer.MIN_VALUE : nums2[longIdx - 1];
+
+        //for edge case: nums1 = []; nums2 = [1] int longRightMin = nums2[longIdx] will cause "Index 1 out of bounds for length 1"
         int longRightMin = longIdx == longLen ? Integer.MAX_VALUE : nums2[longIdx];
 
         if ((shortLen + longLen) % 2 == 1) {
