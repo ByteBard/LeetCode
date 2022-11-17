@@ -2,7 +2,7 @@ package LeetCode;
 
 import java.util.*;
 
-public class SlidingWindowMaximum {
+public class SlidingWindowMaximum_239 {
     /*
         239. 滑动窗口最大值
         给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
@@ -112,7 +112,7 @@ public class SlidingWindowMaximum {
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
 
-    //69%, 29%
+    //90%, 90%
     public int[] maxSlidingWindow_formal(int[] nums, int k) {
         int n = nums.length;
         Deque<Integer> deque = new LinkedList<Integer>();
@@ -143,7 +143,7 @@ public class SlidingWindowMaximum {
 //    来源：力扣（LeetCode）
 //    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-    //90%, 50%
+    //34%, 43%
     // https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/
     public int[] maxSlidingWindow_mliu(int[] nums, int k) {
 
