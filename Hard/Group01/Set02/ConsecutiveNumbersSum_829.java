@@ -1,7 +1,9 @@
 package LeetCode.Hard.Group01.Set02;
 
 public class ConsecutiveNumbersSum_829 {
-
+/*
+https://leetcode.com/problems/consecutive-numbers-sum/solutions/653742/consecutive-numbers-sum/
+ */
     public void run() {
 
         int n = 9;
