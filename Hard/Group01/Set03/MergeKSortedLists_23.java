@@ -1,4 +1,6 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set03;
+
+import LeetCode.ListNode;
 
 import java.util.PriorityQueue;
 

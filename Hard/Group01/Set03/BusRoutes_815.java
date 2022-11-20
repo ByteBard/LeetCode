@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set03;
 
 import java.awt.*;
 import java.util.*;
