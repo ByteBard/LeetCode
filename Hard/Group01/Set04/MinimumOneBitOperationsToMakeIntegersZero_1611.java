@@ -1,16 +1,10 @@
-package LeetCode;
+package LeetCode.Hard.Group01.Set04;
 
-import LeetCode.Hard.Group01.Set03.MinimumNumberOfTapsToOpenToWaterAGarden_1326;
+public class MinimumOneBitOperationsToMakeIntegersZero_1611 {
 
-import java.util.HashSet;
-
-public class RunSolution {
-    public static void main(String[] args) {
-//        MinimumNumberOfTapsToOpenToWaterAGarden_1326 x = new MinimumNumberOfTapsToOpenToWaterAGarden_1326();
-//        x.run();
+    public void run() {
         System.out.println(minimumOneBitOperations(6));
     }
-
 
     public static int minimumOneBitOperations(int n) {
 //decimal to grey:
@@ -18,7 +12,7 @@ public class RunSolution {
 //grey to decimal:
         int num = n;
         int mask = n;
-        while (mask > 0){
+        while (mask > 0) {
             mask = mask >> 1;
             num = num ^ mask;
         }
