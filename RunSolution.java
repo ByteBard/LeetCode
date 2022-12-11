@@ -1,35 +1,46 @@
 package LeetCode;
 
+import LeetCode.Hard.Group01.Set03.BasicCalculator_224;
 import LeetCode.Hard.Group01.Set03.MinimumNumberOfTapsToOpenToWaterAGarden_1326;
 
+import javax.swing.plaf.basic.BasicTextUI;
+import java.beans.PropertyEditorSupport;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Stack;
 
 public class RunSolution {
     public static void main(String[] args) {
-//        MinimumNumberOfTapsToOpenToWaterAGarden_1326 x = new MinimumNumberOfTapsToOpenToWaterAGarden_1326();
+//        BasicCalculator_224 x = new BasicCalculator_224();
 //        x.run();
-        System.out.println(minimumOneBitOperations(6));
+        int[] x = new int[]{1, 2, 1, 0, 2, 1, 0, 1};
+        System.out.println(minTapsFormal(7, x));
+
     }
 
 
-    public static int minimumOneBitOperations(int n) {
-//decimal to grey:
-//        return n ^ (n >> 1);
-//grey to decimal:
-        int num = n;
-        int mask = n;
-        while (mask > 0){
-            mask = mask >> 1;
-            num = num ^ mask;
+    public static int minTapsFormal(int n, int[] ranges) {
+        int[] pre = new int[n + 1];
+        Arrays.fill(pre, Integer.MAX_VALUE);
+        for (int i = 0; i <= n; ++i) {
+            int left = i - ranges[i];
+            int right = i + ranges[i];
+            left = left < 0 ? 0 : left;
+            right = right > n ? n : right;
+            pre[right] = Math.max(pre[right], left);
         }
-        return num;
+
+        int res = 0, breakpoint = n, lowest = Integer.MAX_VALUE;
+        for (int i = n; i >= 0; --i) {
+            lowest = Math.min(pre[i], lowest);
+            if (i == breakpoint) {
+                res++;
+                if(lowest > breakpoint) return -1;
+                if(lowest == 0) return res;
+                breakpoint = lowest;
+                lowest = Integer.MAX_VALUE;
+            }
+        }
+        return -1;
     }
-
-//    作者：charles-chou
-//    链接：https://leetcode.cn/problems/minimum-one-bit-operations-to-make-integers-zero/solution/gen-zhao-ti-shi-zhao-gui-lu-kan-liao-bie-ren-de-ge/
-//    来源：力扣（LeetCode）
-//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-//    https://en.wikipedia.org/wiki/Gray_code
-//    https://leetcode.com/problems/minimum-one-bit-operations-to-make-integers-zero/description/
 }

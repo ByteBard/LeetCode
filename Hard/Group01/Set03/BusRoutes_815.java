@@ -70,6 +70,7 @@ public class BusRoutes_815 {
         while (!queue.isEmpty()) {
             Point info = queue.poll();
             int node = info.x, depth = info.y;
+            //why this path is shortest? Breadth-first search will always find the shortest path in an unweighted graph.
             if (targets.contains(node)) return depth + 1;
             for (Integer nei : graph.get(node)) {
                 if (!seen.contains(nei)) {
