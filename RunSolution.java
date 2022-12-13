@@ -11,10 +11,10 @@ import java.util.Stack;
 
 public class RunSolution {
     public static void main(String[] args) {
-//        BasicCalculator_224 x = new BasicCalculator_224();
-//        x.run();
-        int[] x = new int[]{1, 2, 1, 0, 2, 1, 0, 1};
-        System.out.println(minTapsFormal(7, x));
+        ReverseNodesInKGroup_25 x = new ReverseNodesInKGroup_25();
+        x.run();
+//        int[] x = new int[]{1, 2, 1, 0, 2, 1, 0, 1};
+//        System.out.println(minTapsFormal(7, x));
 
     }
 
