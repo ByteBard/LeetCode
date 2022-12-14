@@ -51,6 +51,7 @@ public class ReverseNodesInKGroup_25 {
         ListNode node4 = new ListNode(4);
         ListNode node5 = new ListNode(5);
         ListNode node6 = new ListNode(6);
+        ListNode node7 = new ListNode(7);
 
         node1.next = node2;
         node2.next = node3;
@@ -58,6 +59,7 @@ public class ReverseNodesInKGroup_25 {
         node3.next = node4;
         node4.next = node5;
         node5.next = node6;
+        node6.next = node7;
 
         ListNode result = reverseKGroup(node1, 3);
         System.out.println(result.toString());
@@ -105,6 +107,9 @@ public class ReverseNodesInKGroup_25 {
 
     //https://leetcode.com/problems/reverse-nodes-in-k-group/solutions/540563/reverse-nodes-in-k-group/
     //https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+
+    // note: Java pass by reference with listNode issue
+    // https://stackoverflow.com/questions/46058486/java-pass-by-reference-with-listnode-issue
     public ListNode reverseLinkedList(ListNode head, int k) {
 
         // Reverse k nodes of the given linked list.
@@ -142,7 +147,7 @@ public class ReverseNodesInKGroup_25 {
         ListNode ptr = head;
         ListNode ktail = null;
 
-        // Head of the final, moified linked list
+        // Head of the final, modified linked list
         ListNode new_head = null;
 
         // Keep going until there are nodes in the list
