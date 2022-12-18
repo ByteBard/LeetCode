@@ -136,7 +136,6 @@ public class ReverseNodesInKGroup_25 {
             k--;
         }
 
-
         // Return the head of the reversed list
         return new_head;
 
@@ -155,8 +154,8 @@ public class ReverseNodesInKGroup_25 {
 
             int count = 0;
 
-            // Start counting nodes from the head
-            ptr = head;
+            // Start counting nodes from the head (I think this step is not necessary)
+            //ptr = head;
 
             // Find the head of the next k nodes
             while (count < k && ptr != null) {
